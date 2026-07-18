@@ -145,6 +145,8 @@ nav.main-nav a:hover, nav.main-nav a.active{color:var(--maroon);}
 .listing-meta{color:var(--text-soft);font-size:.85rem;margin-top:4px;}
 .pill{display:inline-block;background:var(--ink);color:#fff;font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;}
 .pill-maroon{background:var(--maroon);}
+.card-icon-header{height:130px;background:var(--cream);display:flex;align-items:center;justify-content:center;}
+.card-icon-header svg{width:44px;height:44px;color:var(--maroon);}
 
 /* Four-path selector */
 .paths{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px;}
