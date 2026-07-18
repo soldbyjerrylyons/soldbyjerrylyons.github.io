@@ -79,17 +79,17 @@ header.site-header{
   position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
   backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
 }
-.nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:20px;}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:14px;}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:none;}
 .brand-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--maroon);flex:none;}
 .brand-text{line-height:1.15;}
-.brand-text strong{display:block;font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.02em;}
-.brand-text span{display:block;font-size:.68rem;color:var(--text-soft);letter-spacing:.06em;text-transform:uppercase;}
-nav.main-nav{display:flex;align-items:center;gap:20px;}
-nav.main-nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;}
+.brand-text strong{display:block;font-family:'Poppins',sans-serif;font-size:1rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;}
+.brand-text span{display:block;font-size:.68rem;color:var(--text-soft);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;}
+nav.main-nav{display:flex;align-items:center;gap:13px;flex-wrap:nowrap;}
+nav.main-nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:.74rem;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;}
 nav.main-nav a:hover, nav.main-nav a.active{color:var(--maroon);}
-.nav-cta{display:flex;align-items:center;gap:14px;}
-.nav-phone{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink);text-decoration:none;font-size:.85rem;}
+.nav-cta{display:flex;align-items:center;gap:10px;flex:none;}
+.nav-phone{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink);text-decoration:none;font-size:.8rem;white-space:nowrap;}
 .menu-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
 
 /* Full-bleed hero — full photo, flat dark transparent overlay, bold uppercase type (Ben Kinney pattern) */
