@@ -22,6 +22,47 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Floating chat widget (Ben Kinney-style proactive greeting)
+  var chatWidget = document.getElementById('chat-widget');
+  if (chatWidget) {
+    var chatGreeting = document.getElementById('chat-greeting');
+    var chatBubbleBtn = document.getElementById('chat-bubble-btn');
+    var chatGreetingClose = document.getElementById('chat-greeting-close');
+    var chatBadge = document.getElementById('chat-badge');
+
+    var greetingTimer = setTimeout(function () {
+      if (chatGreeting) chatGreeting.classList.add('visible');
+    }, 2500);
+
+    function dismissGreeting() {
+      clearTimeout(greetingTimer);
+      if (chatGreeting) chatGreeting.classList.remove('visible');
+    }
+    function clearBadge() {
+      if (chatBadge) chatBadge.classList.add('hidden');
+    }
+
+    if (chatGreetingClose) {
+      chatGreetingClose.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dismissGreeting();
+      });
+    }
+    if (chatGreeting) {
+      chatGreeting.addEventListener('click', function () {
+        clearBadge();
+        dismissGreeting();
+        if (chatBubbleBtn) chatBubbleBtn.click();
+      });
+    }
+    if (chatBubbleBtn) {
+      chatBubbleBtn.addEventListener('click', function () {
+        clearBadge();
+        dismissGreeting();
+      });
+    }
+  }
+
   // Demo lead-capture form submission
   document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {

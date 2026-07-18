@@ -51,12 +51,12 @@
       <div>
         <h2>This Month's Snapshot</h2>
         <div class="stats" style="grid-template-columns:repeat(2,1fr);">
-          <div class="stat"><div class="num">$398K</div><div class="lbl">Baltimore County median (illustrative)</div></div>
-          <div class="stat"><div class="num">$425K</div><div class="lbl">Maryland statewide median (illustrative)</div></div>
-          <div class="stat"><div class="num">21</div><div class="lbl">Median days on market</div></div>
-          <div class="stat"><div class="num">2.1 mo</div><div class="lbl">Months of inventory</div></div>
+          <div class="stat"><div class="num">$378K</div><div class="lbl">Baltimore County median, May 2026</div></div>
+          <div class="stat"><div class="num">$454K</div><div class="lbl">Maryland statewide median, Jul 2026</div></div>
+          <div class="stat"><div class="num">27</div><div class="lbl">Median days on market, Baltimore County</div></div>
+          <div class="stat"><div class="num">2.1 mo</div><div class="lbl">Months of supply, Baltimore metro</div></div>
         </div>
-        <p style="margin-top:16px;color:var(--text-soft);font-size:.85rem;text-transform:none;">Illustrative figures for prototype purposes — connect to a live Bright MLS statistics feed before launch.</p>
+        <p style="margin-top:16px;color:var(--text-soft);font-size:.85rem;text-transform:none;">Sourced from Bright MLS data via Maryland Realtors and the Bright MLS June 2026 regional market report. Figures are monthly snapshots — update each month for the most current numbers.</p>
       </div>
       
       <div class="form-panel">
@@ -203,6 +203,20 @@
         <button type="button" class="btn btn-outline btn-block" id="quiz-done">Close</button>
       </div>
     </div>
+  </div>
+
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-greeting" id="chat-greeting">
+      <button type="button" class="chat-greeting-close" id="chat-greeting-close" aria-label="Close">&times;</button>
+      <div class="chat-greeting-row">
+        <img class="chat-greeting-avatar" src="jerry-headshot.jpg" alt="Jerry Lyons">
+        <p>Hi there! Let me know if you have any questions and I'll get back to you as soon as possible.</p>
+      </div>
+    </div>
+    <button type="button" class="chat-bubble-btn" id="chat-bubble-btn" data-open-quiz="1" aria-label="Chat with Jerry">
+      <span class="chat-badge" id="chat-badge"></span>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v12H7l-3 3V4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
   </div>
 <script src="site-script.js"></script>
 </body>

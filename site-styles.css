@@ -138,6 +138,7 @@ nav.main-nav a:hover, nav.main-nav a.active{color:var(--maroon);}
 /* Cards / grids */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;align-items:center;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
 .card{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;}
 .card-body{padding:20px;}
 .card small{color:var(--text-soft);}
@@ -284,10 +285,39 @@ footer.site-footer a:hover{color:#fff;}
 .list-check li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;background:var(--maroon);}
 .note-banner{background:var(--maroon-light);border:1px solid var(--maroon);border-radius:var(--radius);padding:14px 18px;font-size:.85rem;color:var(--maroon-dark);margin-bottom:24px;}
 
+/* Floating chat widget (Ben Kinney-style proactive greeting bubble) */
+.chat-widget{position:fixed;right:22px;bottom:22px;z-index:150;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
+.chat-bubble-btn{
+  width:58px;height:58px;border-radius:50%;background:var(--ink);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(20,20,20,.28);
+  position:relative;transition:transform .15s ease, background .15s ease;
+}
+.chat-bubble-btn:hover{transform:translateY(-2px);background:var(--maroon);}
+.chat-bubble-btn svg{width:24px;height:24px;}
+.chat-badge{
+  position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;
+  background:var(--maroon);border:2px solid #fff;
+}
+.chat-badge.hidden{display:none;}
+.chat-greeting{
+  max-width:290px;background:#fff;border-radius:12px;box-shadow:0 16px 40px rgba(20,20,20,.22);
+  padding:16px 18px;position:relative;opacity:0;transform:translateY(8px) scale(.98);
+  pointer-events:none;transition:opacity .25s ease, transform .25s ease;
+}
+.chat-greeting.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.chat-greeting-row{display:flex;gap:12px;align-items:flex-start;}
+.chat-greeting-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--maroon);}
+.chat-greeting p{margin:0;font-size:.9rem;color:var(--text);line-height:1.45;}
+.chat-greeting-close{
+  position:absolute;top:6px;right:8px;background:none;border:none;font-size:1.1rem;
+  color:var(--text-soft);cursor:pointer;line-height:1;padding:2px;
+}
+
 @media (max-width: 980px){
   .hero-fullbleed h1{font-size:2.6rem;}
   .paths{grid-template-columns:repeat(2,1fr);}
   .grid-3{grid-template-columns:1fr 1fr;}
+  .grid-4{grid-template-columns:repeat(2,1fr);}
   .stats{grid-template-columns:1fr 1fr;}
   .rank-grid{grid-template-columns:1fr;gap:48px;}
   .footer-grid{grid-template-columns:1fr 1fr;}
@@ -301,6 +331,7 @@ footer.site-footer a:hover{color:#fff;}
   .hero-fullbleed h1{font-size:2rem;}
   .paths{grid-template-columns:1fr;}
   .grid-3{grid-template-columns:1fr;}
+  .grid-4{grid-template-columns:1fr;}
   .stats{grid-template-columns:1fr 1fr;}
   .form-row{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
