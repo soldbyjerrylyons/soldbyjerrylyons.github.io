@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://soldbyjerrylyons.github.io/sitemap.xml
