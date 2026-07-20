@@ -257,12 +257,13 @@ footer.site-footer a:hover{color:#fff;}
 }
 .page-hero::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(10,10,10,.74), rgba(10,10,10,.84));
+  background:rgba(10,10,10,.58);
 }
 .page-hero .container{position:relative;z-index:1;}
-.page-hero .eyebrow{color:var(--text-faint);}
-.page-hero h1{color:#fff;}
-.page-hero .lede{color:#c9c9c4;}
+.page-hero .eyebrow{color:#e8e7e2;text-shadow:0 1px 6px rgba(0,0,0,.5);}
+.page-hero h1{color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.55);}
+.page-hero .lede{color:#f0f0ee;text-shadow:0 1px 8px rgba(0,0,0,.5);}
+.page-hero .breadcrumb, .page-hero .breadcrumb a{color:#d8d8d4;text-shadow:0 1px 6px rgba(0,0,0,.5);}
 .breadcrumb{font-size:.8rem;color:#9a9a94;margin-bottom:12px;}
 .breadcrumb a{color:#9a9a94;text-decoration:none;}
 
