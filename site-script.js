@@ -1,8 +1,74 @@
 // Jerry Lyons | Next Step Realty — site interactions
-// Lead forms submit live to Formspree, which forwards each submission to
-// Jerry's Follow Up Boss lead-capture email (jerry.lyons@followupboss.me).
+// Lead forms submit to two places at once:
+//   1. Follow Up Boss directly, via a Cloudflare Worker relay (FUB_RELAY_URL)
+//      that calls FUB's official /events API. This creates a fully structured
+//      lead — name, address, tags, correct lead type — and triggers FUB's own
+//      agent-assignment and automation rules.
+//   2. Formspree, which forwards a plain-text copy to Jerry's FUB lead-capture
+//      email as a backup safety net in case the relay is ever down.
+// Both are fire-and-forget: a failure in one never blocks the other, and never
+// blocks the on-page "thanks" confirmation the visitor sees.
 
 var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdnozpq';
+
+// TODO: replace with the real Worker URL once it's deployed (see project notes).
+// Until this is set to a real https://*.workers.dev URL, sendToFUB() is a no-op
+// and only the Formspree path runs — so it's safe to ship before setup is done.
+var FUB_RELAY_URL = 'https://REPLACE-WITH-YOUR-WORKER-URL.workers.dev';
+
+// Reads every field out of a form into a plain object.
+function collectFormValues(form) {
+  var values = {};
+  var fd = new FormData(form);
+  fd.forEach(function (val, key) {
+    if (typeof val === 'string') values[key] = val;
+  });
+  return values;
+}
+
+// Sends a lead straight to Follow Up Boss via the relay. Non-blocking and
+// silently no-ops if the relay isn't configured yet or the request fails —
+// the Formspree backup still covers the lead either way.
+function sendToFUB(formType, tagsCsv, values, pageUrl) {
+  if (!FUB_RELAY_URL || FUB_RELAY_URL.indexOf('REPLACE-WITH') !== -1) return;
+
+  var name = values.name || '';
+  var firstName = values.firstName || '';
+  var lastName = values.lastName || '';
+  if (!firstName && name) {
+    var parts = name.trim().split(/\s+/);
+    firstName = parts.shift() || '';
+    lastName = parts.join(' ');
+  }
+
+  var knownKeys = ['name', 'firstName', 'lastName', 'email', 'phone', 'address', 'city', 'state', 'zip', 'timeline'];
+  var extra = [];
+  Object.keys(values).forEach(function (k) {
+    if (knownKeys.indexOf(k) === -1 && values[k]) extra.push(k + ': ' + values[k]);
+  });
+
+  var payload = {
+    formType: formType,
+    tags: tagsCsv ? tagsCsv.split(',').map(function (t) { return t.trim(); }).filter(Boolean) : [],
+    firstName: firstName,
+    lastName: lastName,
+    email: values.email || '',
+    phone: values.phone || '',
+    address: values.address || '',
+    city: values.city || '',
+    state: values.state || '',
+    zip: values.zip || '',
+    timeline: values.timeline || '',
+    message: extra.join('; '),
+    pageUrl: pageUrl || window.location.href
+  };
+
+  fetch(FUB_RELAY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function () { /* non-fatal; Formspree backup still covers this lead */ });
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   // Mobile nav toggle
@@ -70,9 +136,12 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       var panel = form.closest('.form-panel');
       var confirmBox = panel ? panel.querySelector('.confirm-box') : null;
+      var values = collectFormValues(form);
       var formData = new FormData(form);
       formData.append('_subject', 'New Website Lead: ' + (form.dataset.leadForm || 'Website Form'));
       if (form.dataset.fubTags) formData.append('fub_tags', form.dataset.fubTags);
+
+      sendToFUB(form.dataset.leadForm || 'general', form.dataset.fubTags || '', values);
 
       fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
@@ -145,6 +214,10 @@ document.addEventListener('DOMContentLoaded', function () {
           body.textContent = "Thanks — since you're " + label.toLowerCase() + " (timeline: " + (state.timeline || 'flexible') + "), I'll follow up personally within one business day with next steps tailored to that.";
         }
 
+        var values = collectFormValues(quizForm);
+        values.timeline = state.timeline || '';
+        sendToFUB('quiz', state.intent || 'General Inquiry', values);
+
         var formData = new FormData(quizForm);
         formData.append('_subject', 'New Website Lead: Quiz (' + (state.intentLabel || 'General Inquiry') + ')');
         formData.append('intent', state.intent || '');
@@ -169,8 +242,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var select = footerForm.querySelector('select[name="footer-intent"]');
       var intent = select ? select.value : 'General Inquiry';
       var confirmBox = footerForm.parentElement.querySelector('.confirm-box');
+      var values = collectFormValues(footerForm);
       var formData = new FormData(footerForm);
       formData.append('_subject', 'New Website Lead: Footer Form (' + intent + ')');
+
+      sendToFUB('footer-contact', intent, values);
 
       fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
@@ -183,8 +259,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Home valuation form — submits a real lead to Formspree, then shows an
-  // illustrative instant estimate (not a real AVM) while Jerry follows up.
+  // Home valuation form — submits a real lead to Follow Up Boss + Formspree,
+  // then shows an illustrative instant estimate (not a real AVM) while Jerry
+  // follows up personally.
   var valForm = document.getElementById('valuation-form');
   if (valForm) {
     valForm.addEventListener('submit', function (e) {
@@ -195,9 +272,13 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('val-low').textContent = '$' + low + 'K';
       document.getElementById('val-high').textContent = '$' + high + 'K';
 
+      var fubTags = 'Website Seller Lead, Home Valuation Lead, Home Report Subscriber';
+      var values = collectFormValues(valForm);
+      sendToFUB('home-valuation', fubTags, values);
+
       var formData = new FormData(valForm);
       formData.append('_subject', 'New Website Lead: Website – Home Valuation');
-      formData.append('fub_tags', 'Website Seller Lead, Home Valuation Lead, Home Report Subscriber');
+      formData.append('fub_tags', fubTags);
 
       fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
