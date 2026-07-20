@@ -1,20 +1,20 @@
 /* ===== Jerry Lyons | Next Step Realty — Design System v2 (Ben Kinney-inspired) ===== */
 :root{
-  --ink:#141414;
-  --ink-soft-bg:#1e1e1e;
-  --charcoal:#2a2a2a;
-  --maroon:#7A2020;
-  --maroon-dark:#5C1717;
-  --maroon-light:#F3E4E2;
-  --cream:#F5F3EE;
+  --ink:#121212;
+  --ink-soft-bg:#1A1A1A;
+  --charcoal:#222222;
+  --maroon:#121212;
+  --maroon-dark:#000000;
+  --maroon-light:#F0F0EE;
+  --cream:#FFFFFF;
   --paper:#FFFFFF;
   --text:#1E1E1C;
   --text-soft:#666660;
   --text-faint:#9A9A94;
-  --line:#E4E2DA;
+  --line:#E7E7E4;
   --green:#2E7D6B;
   --radius:10px;
-  --shadow:0 12px 32px rgba(20,20,20,0.12);
+  --shadow:0 12px 32px rgba(20,20,20,0.10);
   --maxw:1200px;
 }
 *{box-sizing:border-box;}
