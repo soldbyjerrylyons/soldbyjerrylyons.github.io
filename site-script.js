@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var formData = new FormData(valForm);
       formData.append('_subject', 'New Website Lead: Website – Home Valuation');
-      formData.append('fub_tags', 'Website Seller Lead, Home Valuation Lead');
+      formData.append('fub_tags', 'Website Seller Lead, Home Valuation Lead, Home Report Subscriber');
 
       fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
