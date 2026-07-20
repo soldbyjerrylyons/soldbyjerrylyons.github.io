@@ -88,7 +88,7 @@ header.site-header{
 nav.main-nav{display:flex;align-items:center;gap:13px;flex-wrap:nowrap;}
 nav.main-nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:.74rem;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;}
 nav.main-nav a:hover, nav.main-nav a.active{color:var(--maroon);}
-.nav-cta{display:flex;align-items:center;gap:10px;flex:none;}
+.nav-cta{display:flex;align-items:center;gap:22px;flex:none;}
 .nav-phone{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink);text-decoration:none;font-size:.8rem;white-space:nowrap;}
 .menu-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
 
