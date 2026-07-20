@@ -257,7 +257,7 @@ footer.site-footer a:hover{color:#fff;}
 }
 .page-hero::before{
   content:"";position:absolute;inset:0;
-  background:rgba(10,10,10,.58);
+  background:rgba(10,10,10,var(--hero-overlay,.58));
 }
 .page-hero .container{position:relative;z-index:1;}
 .page-hero .eyebrow{color:#e8e7e2;text-shadow:0 1px 6px rgba(0,0,0,.5);}
