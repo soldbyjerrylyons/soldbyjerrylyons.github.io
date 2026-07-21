@@ -11,10 +11,8 @@
 
 var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdnozpq';
 
-// TODO: replace with the real Worker URL once it's deployed (see project notes).
-// Until this is set to a real https://*.workers.dev URL, sendToFUB() is a no-op
-// and only the Formspree path runs — so it's safe to ship before setup is done.
-var FUB_RELAY_URL = 'https://REPLACE-WITH-YOUR-WORKER-URL.workers.dev';
+// Cloudflare Worker relay for Follow Up Boss integration
+var FUB_RELAY_URL = 'https://fub-lead-relay.jerry-3a4.workers.dev';
 
 // Reads every field out of a form into a plain object.
 function collectFormValues(form) {
