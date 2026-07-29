@@ -110,8 +110,14 @@
   </url>
   <url>
     <loc>https://jerrylyonsrealestate.com/site-blog.html</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jerrylyonsrealestate.com/site-blog-baltimore-county-market-update-july-2026.html</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
