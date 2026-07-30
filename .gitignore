@@ -1,0 +1,4 @@
+# graphify build artifacts - regenerable via `/graphify .`; kept out of the
+# repo because this site is served directly by GitHub Pages with no Jekyll
+# exclusion config, so anything committed here becomes a public URL.
+graphify-out/
