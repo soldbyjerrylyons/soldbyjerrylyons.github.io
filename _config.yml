@@ -1,0 +1,11 @@
+# Explicit excludes for AI-agent tooling files, so they're never served by
+# GitHub Pages regardless of build type or Jekyll's default dotfile handling.
+# Deliberately minimal -- only `exclude` is set, so nothing else about how
+# Jekyll processes the existing site-*.html pages changes.
+exclude:
+  - CLAUDE.md
+  - AGENTS.md
+  - .claude
+  - .codex
+  - sync-homepage.sh
+  - graphify-out
