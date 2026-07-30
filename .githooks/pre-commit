@@ -1,0 +1,9 @@
+#!/bin/sh
+# index.html must exist for the static host to serve the domain root (CNAME:
+# jerrylyonsrealestate.com), but every page's internal nav links to
+# site-index.html instead. The two are kept as identical content, so whenever
+# site-index.html is staged, mirror it onto index.html in the same commit.
+if git diff --cached --name-only | grep -q '^site-index\.html$'; then
+    cp site-index.html index.html
+    git add index.html
+fi
