@@ -55,28 +55,31 @@
       <div class="breadcrumb"><a href="site-index.html">Home</a> / Sell / Home Valuation</div>
       <span class="eyebrow">Free &amp; Instant</span>
       <h1 style="font-size:2.1rem;">What's Your Maryland Home Worth in Today's Market?</h1>
-      <p class="lede">Get an instant estimate powered by real Bright MLS data, plus free monthly updates on your home's value going forward — then I'll personally refine it with a walkthrough of what's actually selling nearby.</p>
+      <p class="lede">Get an automated estimate from current property and market data, delivered directly to your inbox — then I'll personally refine it using Bright MLS activity and what makes your home unique.</p>
     </div>
   </section>
   <section class="section">
     <div class="container two-col">
       <div>
         <div class="form-panel">
-          <h3>Get My Free Home Value Report</h3>
-          <p style="color:var(--text-soft);font-size:.92rem;text-transform:none;">Takes about 30 seconds. No obligation. You'll also get free monthly updates on your home's value going forward.</p>
+          <h3>Email My Free Home Value Report</h3>
+          <p style="color:var(--text-soft);font-size:.92rem;text-transform:none;">Enter the property and email address where you want the estimate delivered. Takes about 30 seconds.</p>
           <form id="valuation-form">
+            <div class="form-honeypot" aria-hidden="true"><label>Company</label><input type="text" name="company" tabindex="-1" autocomplete="off"></div>
             <div class="form-row"><div><label>First Name</label><input type="text" name="firstName" required></div><div><label>Last Name</label><input type="text" name="lastName" required></div></div>
             <div><label>Property Street Address</label><input type="text" name="address" required placeholder="123 Main St"></div>
             <div class="form-row"><div><label>City</label><input type="text" name="city" required></div><div><label>State</label><input type="text" name="state" value="MD" required></div><div><label>ZIP</label><input type="text" name="zip" required></div></div>
             <div class="form-row"><div><label>Email</label><input type="email" name="email" required></div><div><label>Phone</label><input type="tel" name="phone" required></div></div>
             <div><label>When are you thinking of selling?</label><select name="timeline"><option>Just curious</option><option>3–6 months</option><option>ASAP</option><option>Not sure yet</option></select></div>
-            <label class="consent"><input type="checkbox" required> I agree to be contacted by Jerry Lyons / Next Step Realty by phone, email, and text about my inquiry, including free monthly home value updates. Message/data rates may apply; reply STOP to opt out anytime.</label>
-            <button type="submit" class="btn btn-primary btn-block">Get My Free Home Value Report</button>
+            <label class="consent"><input type="checkbox" name="consent" value="yes" required> Email my requested home value report and enroll me in a free monthly home-value and neighborhood market update from Jerry Lyons / Next Step Realty. I also agree to be contacted by phone, email, and text about this inquiry. Message/data rates may apply; unsubscribe or reply STOP anytime.</label>
+            <button type="submit" class="btn btn-primary btn-block" id="valuation-submit">Get My Value + Monthly Updates</button>
+            <p id="valuation-status" class="valuation-status" role="status" aria-live="polite"></p>
           </form>
           <div id="valuation-result" class="confirm-box">
-            <h4>Here's your estimate</h4>
-            <p>Based on nearby Bright MLS comps, homes like yours have recently sold between <strong><span id="val-low"></span></strong> and <strong><span id="val-high"></span></strong>.</p>
-            <p>Thanks! Your estimate is on its way to your inbox. I'll follow up personally within one business day with a refined number based on your home's actual condition and comps — and you're now set up for free monthly updates on your home's value and local market trends, too.</p>
+            <h4>Your report is on its way</h4>
+            <p class="valuation-estimate"><span id="val-estimate"></span></p>
+            <p>Automated range: <strong><span id="val-low"></span>–<span id="val-high"></span></strong></p>
+            <p>Your full report for <strong><span id="val-address"></span></strong> was emailed to <strong><span id="val-email"></span></strong>. You are also enrolled for a refreshed home value and neighborhood market update once a month. You can unsubscribe from any report.</p>
             <p style="font-size:.78rem;color:var(--text-soft);">This is an automated estimate, not an appraisal, and should not be relied upon as a substitute for an in-person evaluation or a licensed appraiser's opinion of value.</p>
           </div>
         </div>

@@ -257,35 +257,64 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Home valuation form — submits a real lead to Follow Up Boss + Formspree,
-  // then shows an illustrative instant estimate (not a real AVM) while Jerry
-  // follows up personally.
+  // Home valuation form — the secure Worker retrieves a real automated value,
+  // creates the FUB lead, and emails a branded report from Jerry's work mailbox.
   var valForm = document.getElementById('valuation-form');
   if (valForm) {
     valForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var resultBox = document.getElementById('valuation-result');
-      var low = Math.floor((320 + Math.random() * 140));
-      var high = low + Math.floor(20 + Math.random() * 40);
-      document.getElementById('val-low').textContent = '$' + low + 'K';
-      document.getElementById('val-high').textContent = '$' + high + 'K';
-
       var fubTags = 'Website Seller Lead, Home Valuation Lead, Home Report Subscriber';
       var values = collectFormValues(valForm);
-      sendToFUB('home-valuation', fubTags, values);
+      var submitButton = document.getElementById('valuation-submit');
+      var status = document.getElementById('valuation-status');
+      var originalLabel = submitButton.textContent;
+      status.className = 'valuation-status';
+      status.textContent = 'Calculating your estimate and preparing the email…';
+      submitButton.disabled = true;
+      submitButton.textContent = 'Preparing report…';
+
+      var payload = {
+        formType: 'home-valuation',
+        tags: fubTags.split(',').map(function (tag) { return tag.trim(); }),
+        firstName: values.firstName || '', lastName: values.lastName || '',
+        email: values.email || '', phone: values.phone || '',
+        address: values.address || '', city: values.city || '', state: values.state || '', zip: values.zip || '',
+        timeline: values.timeline || '', consent: values.consent === 'yes', monthlyOptIn: values.consent === 'yes', company: values.company || '',
+        pageUrl: window.location.href
+      };
 
       var formData = new FormData(valForm);
       formData.append('_subject', 'New Website Lead: Website – Home Valuation');
       formData.append('fub_tags', fubTags);
 
-      fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      }).finally(function () {
+      fetch(FUB_RELAY_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+      }).then(function (response) {
+        return response.json().catch(function () { return {}; }).then(function (body) {
+          if (!response.ok || !body.ok) throw new Error(body.error || 'We could not complete the report.');
+          return body;
+        });
+      }).then(function (report) {
+        document.getElementById('val-estimate').textContent = formatValuationMoney(report.estimate);
+        document.getElementById('val-low').textContent = formatValuationMoney(report.rangeLow);
+        document.getElementById('val-high').textContent = formatValuationMoney(report.rangeHigh);
+        document.getElementById('val-address').textContent = report.formattedAddress || payload.address;
+        document.getElementById('val-email').textContent = report.emailedTo || payload.email;
         valForm.style.display = 'none';
         if (resultBox) resultBox.style.display = 'block';
+        fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
+          .catch(function () { /* FUB already has the structured lead */ });
+      }).catch(function (error) {
+        status.className = 'valuation-status error';
+        status.textContent = error.message || 'We could not complete the report. Please verify the address or call Jerry at (410) 430-3877.';
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
       });
     });
   }
 });
+
+function formatValuationMoney(value) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Number(value) || 0);
+}
