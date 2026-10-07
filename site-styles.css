@@ -335,6 +335,8 @@ footer.site-footer a:hover{color:#fff;}
 }
 @media (max-width: 680px){
   nav.main-nav{display:none;}
+  .nav-cta .btn{display:none;}
+  .nav-cta{gap:12px;}
   .menu-toggle{display:block;}
   .hero-fullbleed{min-height:74vh;}
   .hero-fullbleed h1{font-size:2rem;}
