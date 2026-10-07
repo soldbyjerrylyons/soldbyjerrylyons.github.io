@@ -65,7 +65,7 @@
       <h3 style="text-transform:none;font-size:1.15rem;">Accessibility Statement</h3>
       <p>We are committed to ensuring this website is accessible to all users, including those with disabilities, and aim to conform to WCAG 2.1 Level AA guidelines. If you encounter an accessibility barrier, please contact us so we can address it.</p>
       <h3 style="text-transform:none;font-size:1.15rem;">Live Chat &amp; AI Assistant</h3>
-      <p>The chat window on this site is answered by Jerry Lyons when he is available. When he is not, an automated AI assistant responds on his behalf with general information. AI responses are not legal, tax, lending, or appraisal advice and are not an offer or commitment by Jerry Lyons or Next Step Realty. Jerry personally reviews chat conversations and follows up. Chat messages may be stored by our chat provider and in our customer relationship management system to respond to your inquiry.</p>
+      <p>The chat window on this site is an automated AI assistant that answers on Jerry Lyons' behalf with general information. AI responses are not legal, tax, lending, or appraisal advice and are not an offer or commitment by Jerry Lyons or Next Step Realty. Your messages are sent to our AI provider to generate replies. If you ask Jerry to contact you, your contact details and the conversation are saved in our customer relationship management system so he can follow up.</p>
       <h3 style="text-transform:none;font-size:1.15rem;">Fair Housing &amp; MLS/Brokerage Disclosures</h3>
       <p>Jerry Lyons is a licensed real estate agent affiliated with Next Step Realty, a Maryland-licensed real estate brokerage (Broker License #573865), 22 W Padonia Rd, Suite A-100, Timonium, MD 21093. Equal Housing Opportunity. Listing information is provided by Bright MLS and is deemed reliable but not guaranteed. Listing broker and agent are identified on each listing display. This site's automated home valuation tool provides an estimate only and is not an appraisal.</p>
       <p style="color:var(--text-soft);font-size:.85rem;text-transform:none;">License information can be independently verified through the Maryland Real Estate Commission's public license search at labor.maryland.gov/license/mrec.</p>
@@ -211,8 +211,7 @@
     </div>
   </div>
 <script src="site-script.js"></script>
-<!-- Tidio live chat: Lyro AI answers visitors automatically; toggle yourself online/offline
-     in the Tidio mobile app to take over live, or let Lyro keep handling it. -->
-<script src="//code.tidio.co/m6aokihb72vjpyx6idrh6f5jh3j9ga8c.js" async></script>
+<!-- Website AI chat (Claude): answers on Jerry's behalf; leads go to Follow Up Boss via the lead relay. Source: Jerry Lyons Website/chat-agent. -->
+<script src="site-chat-agent.js" data-endpoint="https://jerry-chat-agent.jerry-3a4.workers.dev" defer></script>
 </body>
 </html>
