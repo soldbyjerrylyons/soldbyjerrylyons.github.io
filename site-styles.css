@@ -185,6 +185,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--maroon);
   padding:22px;color:#1c4c40;
 }
 .confirm-box h4{color:#1c4c40;margin-bottom:6px;text-transform:none;}
+.form-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important;}
+.valuation-status{min-height:20px;margin:10px 0 0;font-size:.82rem;text-transform:none;color:var(--text-soft);}
+.valuation-status.error{color:#9b252d;}
+.valuation-estimate{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:10px 0;color:#1c4c40;}
+.btn[disabled]{opacity:.65;cursor:wait;}
 
 /* Testimonials */
 .testimonial{background:var(--paper);border-radius:var(--radius);padding:24px;border:1px solid var(--line);box-shadow:var(--shadow);}
