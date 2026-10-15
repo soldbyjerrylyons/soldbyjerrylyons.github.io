@@ -369,3 +369,4 @@ footer.site-footer a:hover{color:#fff;}
   .market-table thead th{white-space:normal;font-size:.62rem;}
   .market-table th[scope="row"]{white-space:normal;}
 }
+.market-table-home th,.market-table-home td{font-weight:700;background:#f6f4ef;}
