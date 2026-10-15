@@ -370,3 +370,12 @@ footer.site-footer a:hover{color:#fff;}
   .market-table th[scope="row"]{white-space:normal;}
 }
 .market-table-home th,.market-table-home td{font-weight:700;background:#f6f4ef;}
+/* Blog article pages */
+.article-body{max-width:760px;}
+.article-body h2{font-size:1.35rem;margin-top:1.8em;}
+.article-body ul,.article-body ol{margin:0 0 1em;padding-left:1.3em;}
+.article-body li{margin-bottom:.45em;}
+.article-body .market-table-wrap{margin:8px 0 16px;}
+.article-body .market-table td{white-space:normal;}
+.article-meta{font-size:.85rem;color:var(--text-soft);}
+.article-note{font-size:.85rem;color:var(--text-soft);}
