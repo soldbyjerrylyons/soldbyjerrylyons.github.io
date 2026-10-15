@@ -327,3 +327,17 @@ document.addEventListener('DOMContentLoaded', function () {
 function formatValuationMoney(value) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Number(value) || 0);
 }
+
+// Anonymous page-view counter: page path + the site the visitor came from.
+// No cookies, no IP or personal data stored. Lets the website agent see which
+// pages people visit and where they come from (Google, Facebook, etc.).
+(function () {
+  try {
+    var host = location.hostname;
+    if (host !== 'jerrylyonsrealestate.com' && host !== 'www.jerrylyonsrealestate.com') return;
+    var ref = '';
+    try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) {}
+    var payload = JSON.stringify({ p: location.pathname, r: ref });
+    navigator.sendBeacon('https://jerry-chat-agent.jerry-3a4.workers.dev/hit', new Blob([payload], { type: 'text/plain' }));
+  } catch (e) {}
+})();
