@@ -264,8 +264,11 @@ document.addEventListener('DOMContentLoaded', function () {
     valForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var resultBox = document.getElementById('valuation-result');
-      var fubTags = 'Website Seller Lead, Home Valuation Lead, Home Report Subscriber';
       var values = collectFormValues(valForm);
+      // Monthly updates are a separate, optional opt-in. The required "consent"
+      // box only covers the requested report and follow-up about this request.
+      var monthlyOptIn = values.monthlyUpdates === 'yes';
+      var fubTags = 'Website Seller Lead, Home Valuation Lead' + (monthlyOptIn ? ', Home Report Subscriber' : '');
       var submitButton = document.getElementById('valuation-submit');
       var status = document.getElementById('valuation-status');
       var originalLabel = submitButton.textContent;
@@ -280,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
         firstName: values.firstName || '', lastName: values.lastName || '',
         email: values.email || '', phone: values.phone || '',
         address: values.address || '', city: values.city || '', state: values.state || '', zip: values.zip || '',
-        timeline: values.timeline || '', consent: values.consent === 'yes', monthlyOptIn: values.consent === 'yes', company: values.company || '',
+        timeline: values.timeline || '', consent: values.consent === 'yes', monthlyOptIn: monthlyOptIn, company: values.company || '',
         pageUrl: window.location.href
       };
 
@@ -301,6 +304,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('val-high').textContent = formatValuationMoney(report.rangeHigh);
         document.getElementById('val-address').textContent = report.formattedAddress || payload.address;
         document.getElementById('val-email').textContent = report.emailedTo || payload.email;
+        var monthlyNote = document.getElementById('val-monthly-note');
+        if (monthlyNote) {
+          monthlyNote.textContent = report.monthlyUpdates
+            ? 'You are also enrolled for a refreshed home value and neighborhood market update once a month. You can unsubscribe anytime.'
+            : '';
+        }
         valForm.style.display = 'none';
         if (resultBox) resultBox.style.display = 'block';
         fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })

@@ -354,3 +354,6 @@ footer.site-footer a:hover{color:#fff;}
   .cta-band{padding:34px 22px;}
   .footer-form-band h2{font-size:1.5rem;}
 }
+
+/* Footer contact form consent checkbox (footer hides plain labels; show this one) */
+.footer-form-band label.consent{display:flex;color:#c9c9c4;}
