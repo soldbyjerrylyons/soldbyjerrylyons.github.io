@@ -60,6 +60,7 @@ if up:
         '      <p class="center" style="margin-top:16px;"><a href="site-open-houses.html">See all open houses &rarr;</a></p>\n'
         '    </div>\n'
         '  </section>\n'
+        '  <style>@media(max-width:760px){#next-open-house .grid-3{grid-template-columns:1fr!important;max-width:420px!important;}}</style>\n'
         '  <script>(function(){var n=Date.now(),s=document.getElementById("next-open-house");if(!s)return;var left=0;'
         's.querySelectorAll(".oh-item").forEach(function(c){if(Date.parse(c.getAttribute("data-end"))<=n){c.remove();}else{left++;}});'
         'if(!left){s.remove();}else{var g=s.querySelector(".grid-3");g.style.gridTemplateColumns="repeat("+left+",1fr)";if(left===1){g.style.maxWidth="420px";}}})();</script>'
