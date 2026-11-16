@@ -1,10 +1,10 @@
-"""Monthly "This Month" box on the town pages (Jerry 2026-11-15).
+"""Monthly "This Month" box on the town pages.
 
-Source: the ONE shared market record, data/market-numbers.json (Maryland
-REALTORS Housing Statistics, Bright MLS data). Approved sources only give
-COUNTY-level figures, so each town box shows its county's numbers, clearly
-labeled as county-wide, with the record's Bright MLS source line. Never a
-town-level estimate. No outside downloads.
+Rule (Jerry 2026-11-15, "only keep the 405"): the ONLY Baltimore number shown
+anywhere public is Bright MLS's Baltimore Metro ("Baltimore area") figure from
+the ONE shared record, data/market-numbers.json months[0].baltimore_metro.
+Never show Baltimore County or Baltimore City figures. Never a town estimate.
+No outside downloads.
 Run from the repo root:  python _tools/update_town_listings.py
 Prints what changed; exits 1 (and changes nothing) if the record can't be read.
 """
@@ -12,13 +12,13 @@ import html, json, re, sys
 
 RECORD = "data/market-numbers.json"
 
-# page -> (town shown, county area name exactly as in the record's counties[])
+# page -> town shown (every box shows the Baltimore area / Bright MLS Baltimore Metro figures)
 PAGES = {
-    "site-owings-mills.html": ("Owings Mills", "Baltimore County"),
-    "site-pikesville.html":   ("Pikesville", "Baltimore County"),
-    "site-reisterstown.html": ("Reisterstown", "Baltimore County"),
-    "site-timonium.html":     ("Lutherville-Timonium", "Baltimore County"),
-    "site-baltimore.html":    ("Baltimore City", "Baltimore City"),
+    "site-owings-mills.html": "Owings Mills",
+    "site-pikesville.html":   "Pikesville",
+    "site-reisterstown.html": "Reisterstown",
+    "site-timonium.html":     "Lutherville-Timonium",
+    "site-baltimore.html":    "Baltimore City",
 }
 START, END = "<!-- MONTHLY-LISTINGS:START -->", "<!-- MONTHLY-LISTINGS:END -->"
 
@@ -33,23 +33,24 @@ def pct(v):
     return ("+" if v > 0 else "&minus;" if v < 0 else "") + f"{abs(v):.1f}%"
 
 
-def block(town, area, m):
-    row = next((c for c in m["counties"] if c["area"] == area), None)
-    if not row:
+def block(town, m):
+    bm = m.get("baltimore_metro")
+    if not bm or not bm.get("median_home_price"):
         return None
     month = m["month_label"]
-    notice = html.escape(m["notice"], quote=False).replace("®", "&reg;")
-    title = f"This Month in {town}" if town != area else "This Month"
-    scope = (f"County-wide figures for {area}, which includes {town}; "
-             f"not specific to {town}. ") if town != area else ""
+    notice = html.escape(bm["notice"], quote=False).replace("®", "&reg;")
+    tiles = [f'<div class="stat"><div class="num">{money(bm["median_home_price"])}</div><div class="lbl">Baltimore area median home price, {month} ({bm.get("median_home_price_change_text") or pct(bm["median_home_price_change_pct"]) + " vs. a year ago"})</div></div>']
+    if bm.get("median_days_on_market") is not None:
+        tiles.append(f'<div class="stat"><div class="num">{bm["median_days_on_market"]}</div><div class="lbl">Baltimore area median days on market, {month}</div></div>')
+    if bm.get("new_listings") is not None:
+        tiles.append(f'<div class="stat"><div class="num">{int(bm["new_listings"]):,}</div><div class="lbl">Baltimore area new listings, {month} ({pct(bm["new_listings_change_pct"])})</div></div>')
+    tiles = "\n          ".join(tiles)
     return f"""{START}
-        <h3 style="margin-top:20px;text-transform:none;font-size:1.1rem;">{title}: {area}, {month}</h3>
+        <h3 style="margin-top:20px;text-transform:none;font-size:1.1rem;">This Month in the Baltimore Area, {month}</h3>
         <div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));">
-          <div class="stat"><div class="num">{money(row['median_sale_price'])}</div><div class="lbl">{area} median sale price, {month} ({pct(row['median_price_change_pct'])} vs. a year ago)</div></div>
-          <div class="stat"><div class="num">{int(row['units_sold']):,}</div><div class="lbl">{area} homes sold, {month}</div></div>
-          <div class="stat"><div class="num">{row['months_of_inventory']}</div><div class="lbl">{area} months of inventory, {month}</div></div>
+          {tiles}
         </div>
-        <p style="margin-top:6px;color:var(--text-soft);font-size:.78rem;text-transform:none;">{scope}{notice} Updated monthly.</p>
+        <p style="margin-top:6px;color:var(--text-soft);font-size:.78rem;text-transform:none;">Figures are for the whole Baltimore area (Bright MLS Baltimore Metro), which includes {town}; not specific to {town}. {notice} Updated monthly.</p>
         {END}""", month
 
 
@@ -61,10 +62,10 @@ def main():
         print(f"ERROR: could not read {RECORD}: {e}")
         sys.exit(1)
     new = {}
-    for page, (town, area) in PAGES.items():
-        b = block(town, area, m)
+    for page, town in PAGES.items():
+        b = block(town, m)
         if not b:
-            print(f"ERROR: {area} not in {RECORD} months[0]")
+            print(f"ERROR: baltimore_metro missing in {RECORD} months[0]")
             sys.exit(1)
         new[page] = b
     for page, (html_block, month) in new.items():
