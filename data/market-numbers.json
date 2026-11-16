@@ -1,5 +1,5 @@
 {
-  "_about": "Jerry Lyons' ONE shared record of market numbers. Written by the Website market update routine (monthly, Maryland REALTORS) and the Monday website check (weekly Freddie Mac rate) at the same time they update the website. Every other agent (FB/IG market post, LinkedIn, Google Business, chat agent) reads numbers ONLY from here. Never estimate; if the month you need isn't here yet, wait. Newest month first.",
+  "_about": "Jerry Lyons' ONE shared record of market numbers. Written by the Website market update routine (monthly, Maryland REALTORS) and the Monday website check (weekly Freddie Mac rate) at the same time they update the website. Every other agent (FB/IG market post, LinkedIn, Google Business, chat agent) reads numbers ONLY from here. Never estimate; if the month you need isn't here yet, wait. Newest month first. HEADLINE RULE (Jerry, 2026-11-15): the overall/headline market number is Bright MLS's 'Baltimore Metro' figure (baltimore_metro block, labeled 'Baltimore area' / 'Baltimore Metro'); Baltimore County and Baltimore City (Maryland REALTORS) go underneath as supporting numbers. Never combine or estimate.",
   "public_url": "https://jerrylyonsrealestate.com/data/market-numbers.json",
   "updated": "2026-11-15",
   "mortgage_rate": {
@@ -14,7 +14,11 @@
     "notice": "Mortgage rates reflect the national average reported in Freddie Mac's Primary Mortgage Market Survey released November 12, 2026; your individual rate depends on credit, down payment, and loan type."
   },
   "rate_history": [
-    {"release_date": "2026-11-12", "rate_30yr": 7.11, "rate_15yr": 6.45}
+    {
+      "release_date": "2026-11-12",
+      "rate_30yr": 7.11,
+      "rate_15yr": 6.45
+    }
   ],
   "months": [
     {
@@ -24,6 +28,28 @@
       "source": "Maryland REALTORS October 2026 Housing Statistics (Bright MLS data)",
       "source_url": "https://www.mdrealtor.org/HousingStats",
       "notice": "Based on information from Bright MLS for October 1, 2026 through October 31, 2026, as published in Maryland REALTORS®' October 2026 Housing Statistics; data is reliable but not guaranteed.",
+      "baltimore_metro": {
+        "label": "Baltimore Metro",
+        "headline_label": "Baltimore area",
+        "area_note": "Bright MLS Baltimore Metro: Baltimore City plus Anne Arundel, Baltimore, Carroll, Harford, Howard and Queen Anne's counties.",
+        "source": "Bright MLS October 2026 Housing Market Report (released 2026-11-10)",
+        "source_url": "https://www.globenewswire.com/news-release/2026/11/10/3400010/0/en/bright-mls-october-2026-housing-market-report-housing-market-momentum-slows-considerably.html",
+        "source_mirror_url": "https://www.manilatimes.net/2026/11/11/tmt-newswire/globenewswire/bright-mls-october-2026-housing-market-report-housing-market-momentum-slows-considerably/2466847",
+        "found_on": "2026-11-15",
+        "verified_note": "Figures quoted from the release's Baltimore Metro Overview (read via the mirror on 2026-11-15; GlobeNewswire returns 403 to the cloud fetcher).",
+        "median_home_price": 405000,
+        "median_home_price_change_pct": 0.0,
+        "median_home_price_change_text": "unchanged from a year ago",
+        "new_purchase_contracts": 2517,
+        "new_purchase_contracts_change_pct": -17.4,
+        "new_listings": 3533,
+        "new_listings_change_pct": -4.0,
+        "active_listings_change_pct": 22.1,
+        "median_days_on_market": 19,
+        "median_days_on_market_change_text": "four days slower than a year ago",
+        "showings_change_pct": -15.5,
+        "notice": "Based on information from Bright MLS's October 2026 Housing Market Report (Baltimore Metro); data is reliable but not guaranteed."
+      },
       "baltimore_county": {
         "median_sale_price": 370000,
         "median_sale_price_year_ago": 370600,
@@ -39,13 +65,55 @@
         "active_inventory_change_pct": 21.5
       },
       "counties": [
-        {"area": "Baltimore County", "median_sale_price": 370000, "median_price_change_pct": -0.2, "units_sold": 616, "months_of_inventory": 2.9},
-        {"area": "Baltimore City", "median_sale_price": 249900, "median_price_change_pct": 2.0, "units_sold": 469, "months_of_inventory": 5.5},
-        {"area": "Anne Arundel County", "median_sale_price": 507340, "median_price_change_pct": 4.6, "units_sold": 515, "months_of_inventory": 2.6},
-        {"area": "Carroll County", "median_sale_price": 471000, "median_price_change_pct": -5.8, "units_sold": 168, "months_of_inventory": 2.3},
-        {"area": "Harford County", "median_sale_price": 369990, "median_price_change_pct": -5.1, "units_sold": 226, "months_of_inventory": 3.0},
-        {"area": "Howard County", "median_sale_price": 575000, "median_price_change_pct": -7.2, "units_sold": 209, "months_of_inventory": 2.3},
-        {"area": "Maryland", "median_sale_price": 430000, "median_price_change_pct": -1.7, "units_sold": 4785, "months_of_inventory": 3.6}
+        {
+          "area": "Baltimore County",
+          "median_sale_price": 370000,
+          "median_price_change_pct": -0.2,
+          "units_sold": 616,
+          "months_of_inventory": 2.9
+        },
+        {
+          "area": "Baltimore City",
+          "median_sale_price": 249900,
+          "median_price_change_pct": 2.0,
+          "units_sold": 469,
+          "months_of_inventory": 5.5
+        },
+        {
+          "area": "Anne Arundel County",
+          "median_sale_price": 507340,
+          "median_price_change_pct": 4.6,
+          "units_sold": 515,
+          "months_of_inventory": 2.6
+        },
+        {
+          "area": "Carroll County",
+          "median_sale_price": 471000,
+          "median_price_change_pct": -5.8,
+          "units_sold": 168,
+          "months_of_inventory": 2.3
+        },
+        {
+          "area": "Harford County",
+          "median_sale_price": 369990,
+          "median_price_change_pct": -5.1,
+          "units_sold": 226,
+          "months_of_inventory": 3.0
+        },
+        {
+          "area": "Howard County",
+          "median_sale_price": 575000,
+          "median_price_change_pct": -7.2,
+          "units_sold": 209,
+          "months_of_inventory": 2.3
+        },
+        {
+          "area": "Maryland",
+          "median_sale_price": 430000,
+          "median_price_change_pct": -1.7,
+          "units_sold": 4785,
+          "months_of_inventory": 3.6
+        }
       ]
     }
   ]
