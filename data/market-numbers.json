@@ -1,5 +1,5 @@
 {
-  "_about": "Jerry Lyons' ONE shared record of market numbers. Written by the Website market update routine (monthly, Maryland REALTORS) and the Monday website check (weekly Freddie Mac rate) at the same time they update the website. Every other agent (FB/IG market post, LinkedIn, Google Business, chat agent) reads numbers ONLY from here. Never estimate; if the month you need isn't here yet, wait. Newest month first. HEADLINE RULE (Jerry, 2026-11-15): the overall/headline market number is Bright MLS's 'Baltimore Metro' figure (baltimore_metro block, labeled 'Baltimore area' / 'Baltimore Metro'); Baltimore County and Baltimore City (Maryland REALTORS) go underneath as supporting numbers. Never combine or estimate.",
+  "_about": "Jerry Lyons' ONE shared record of market numbers. Written by the Website market update routine (monthly, from Bright MLS's official Baltimore Metro report PDF) and the Monday website check (weekly Freddie Mac rate) at the same time they update the website. Every other agent (FB/IG market post, LinkedIn, Google Business, chat agent) reads numbers ONLY from here. Never estimate; if the month you need isn't here yet, wait. Newest month first. ONLY THE 405 (Jerry, 2026-11-15: \"don't like the two different numbers for baltimore, please only keep the 405\"): the headline AND the ONLY Baltimore number shown anywhere public is months[0].baltimore_metro ('Baltimore area' / 'Baltimore Metro'), with months[0].baltimore_metro.notice as its source line. Any county data below (baltimore_county, counties, county_source_internal, county_notice_internal) is internal only - never shown anywhere public. Never combine areas or estimate.",
   "public_url": "https://jerrylyonsrealestate.com/data/market-numbers.json",
   "updated": "2026-11-15",
   "mortgage_rate": {
@@ -25,9 +25,9 @@
       "month": "2026-10",
       "month_label": "October 2026",
       "found_on": "2026-11-15",
-      "source": "Maryland REALTORS October 2026 Housing Statistics (Bright MLS data)",
-      "source_url": "https://www.mdrealtor.org/HousingStats",
-      "notice": "Based on information from Bright MLS for October 1, 2026 through October 31, 2026, as published in Maryland REALTORS®' October 2026 Housing Statistics; data is reliable but not guaranteed.",
+      "county_source_internal": "Maryland REALTORS October 2026 Housing Statistics (Bright MLS data)",
+      "county_source_url_internal": "https://www.mdrealtor.org/HousingStats",
+      "county_notice_internal": "Based on information from Bright MLS for October 1, 2026 through October 31, 2026, as published in Maryland REALTORS®' October 2026 Housing Statistics; data is reliable but not guaranteed.",
       "baltimore_metro": {
         "label": "Baltimore Metro",
         "headline_label": "Baltimore area",
