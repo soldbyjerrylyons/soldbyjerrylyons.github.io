@@ -59,7 +59,7 @@
     </div>
   </section>
   <!-- DEFAULT-TEASER-START -->
-  <div id="oh-teaser">
+  <div id="oh-teaser" hidden>
   <section class="section section-alt">
     <div class="container">
       <div class="cta-band">
@@ -76,6 +76,25 @@
   </div>
   <!-- DEFAULT-TEASER-END -->
   <!-- WEEKLY-OPEN-HOUSES-START -->
+  <section class="section" id="oh-list">
+    <div class="container">
+      <h2 class="center" style="margin:0 auto 18px;">Upcoming Open House</h2>
+      <div class="grid-3" style="grid-template-columns:repeat(1,1fr);max-width:420px;margin:0 auto;">
+        <div class="card oh-card" data-end="2026-11-21T13:00:00-05:00">
+          <img src="https://openhouse.jerrylyonsrealestate.com/m/0450cbf3a9e86862/flyer.jpg" alt="Open house flyer for 820 Scarlett Dr, Towson, MD 21286" loading="lazy">
+          <div class="card-body">
+            <span class="badge">Open House</span>
+            <h3 style="margin:10px 0 8px;">820 Scarlett Dr, Towson, MD 21286</h3>
+            <div class="oh-date" data-end="2026-11-21T13:00:00-05:00" style="font-weight:700;color:var(--ink);">Saturday, Nov 21 &middot; 11am&ndash;1pm</div>
+            <p style="color:var(--text-soft);font-size:.9rem;margin-top:6px;">$459,000</p>
+            <p style="margin-top:14px;"><a class="btn btn-secondary btn-sm" href="https://www.google.com/maps/search/?api=1&amp;query=820+Scarlett+Dr,+Towson,+MD+21286" target="_blank" rel="noopener">Directions &#8599;</a> <a class="btn btn-primary btn-sm" href="#open-house-form">Register</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>@media(max-width:760px){#oh-list .grid-3{grid-template-columns:1fr!important;max-width:420px!important;}}</style>
+  <script>(function(){var n=Date.now(),s=document.getElementById("oh-list"),t=document.getElementById("oh-teaser");if(!s)return;var left=0;s.querySelectorAll(".oh-card").forEach(function(c){c.querySelectorAll(".oh-date").forEach(function(d){if(Date.parse(d.getAttribute("data-end"))<=n)d.remove();});if(!c.querySelector(".oh-date")){c.remove();}else{left++;}});if(!left){s.remove();if(t)t.hidden=false;}else{var g=s.querySelector(".grid-3"),k=Math.min(left,3);g.style.gridTemplateColumns="repeat("+k+",1fr)";g.style.maxWidth=[0,420,900,1200][k]+"px";}})();</script>
   <!-- WEEKLY-OPEN-HOUSES-END -->
   <section class="section">
     <div class="container two-col">
