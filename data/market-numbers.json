@@ -1,19 +1,24 @@
 {
   "_about": "Jerry Lyons' ONE shared record of market numbers. Written by the Website market update routine (monthly, from Bright MLS's official Baltimore Metro report PDF) and the Monday website check (weekly Freddie Mac rate) at the same time they update the website. Every other agent (FB/IG market post, LinkedIn, Google Business, chat agent) reads numbers ONLY from here. Never estimate; if the month you need isn't here yet, wait. Newest month first. ONLY THE 405 (Jerry, 2026-11-15: \"don't like the two different numbers for baltimore, please only keep the 405\"): the headline AND the ONLY Baltimore number shown anywhere public is months[0].baltimore_metro ('Baltimore area' / 'Baltimore Metro'), with months[0].baltimore_metro.notice as its source line. Any county data below (baltimore_county, counties, county_source_internal, county_notice_internal) is internal only - never shown anywhere public. Never combine areas or estimate.",
   "public_url": "https://jerrylyonsrealestate.com/data/market-numbers.json",
-  "updated": "2026-11-15",
+  "updated": "2026-11-23",
   "mortgage_rate": {
     "source": "Freddie Mac Primary Mortgage Market Survey",
     "source_url": "https://www.freddiemac.com/pmms",
-    "release_date": "2026-11-12",
-    "rate_30yr": 7.11,
-    "rate_30yr_prior_week": 7.18,
-    "rate_30yr_year_ago": 6.24,
-    "rate_15yr": 6.45,
-    "found_on": "2026-11-15",
-    "notice": "Mortgage rates reflect the national average reported in Freddie Mac's Primary Mortgage Market Survey released November 12, 2026; your individual rate depends on credit, down payment, and loan type."
+    "release_date": "2026-11-19",
+    "rate_30yr": 7.28,
+    "rate_30yr_prior_week": 7.11,
+    "rate_30yr_year_ago": 6.26,
+    "rate_15yr": 6.66,
+    "found_on": "2026-11-23",
+    "notice": "Mortgage rates reflect the national average reported in Freddie Mac's Primary Mortgage Market Survey released November 19, 2026; your individual rate depends on credit, down payment, and loan type."
   },
   "rate_history": [
+    {
+      "release_date": "2026-11-19",
+      "rate_30yr": 7.28,
+      "rate_15yr": 6.66
+    },
     {
       "release_date": "2026-11-12",
       "rate_30yr": 7.11,
